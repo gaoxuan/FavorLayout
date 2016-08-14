@@ -10,6 +10,33 @@
 ##怎么用
 
 ```
+android {
+    
+	...	
+
+	buildscript{
+	        repositories {
+	            jcenter()
+	            maven { url = 'https://jitpack.io' }
+	        }
+	    }
+
+	    allprojects {
+	        repositories {
+	            jcenter()
+	            maven { url = 'https://jitpack.io' }
+	        }
+	    }
+}
+```
+```
+dependencies {
+    ...
+    compile 'com.github.gaoxuan:FavorLayout:1.0'
+}
+```
+
+```
  <com.gx.favorlayout_favorlayout.FavorLayout
         android:id="@+id/favor"
         android:layout_width="match_parent"
