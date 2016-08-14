@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FavorLayout">
+        <attr name="favorDuration" format="integer" />
+        <attr name="favorSpeedMode">
+            <enum name="linear" value="0" />
+            <enum name="accelerate" value="1" />
+            <enum name="decelerate" value="2" />
+            <enum name="acceleratedecelerate" value="3" />
+        </attr>
+        <attr name="favorIntercurrentHeartNum" format="integer" />
+        <attr name="favorMaxHeartNum" format="integer" />
+        <attr name="favorNodeNum" format="integer" />
+        <attr name="favorHeartWidth" format="dimension" />
+        <attr name="favorRangeWidth" format="dimension" />
+        <attr name="favorMarginRight" format="dimension" />
+        <attr name="favorMarginBottom" format="dimension" />
+    </declare-styleable>
+</resources>
