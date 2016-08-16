@@ -58,4 +58,6 @@ class YourImageView extends AnimImageView {
         //custom
     }
 }
+
+favorlayout.setViewType(YourImageView.class.getName());
 ```
