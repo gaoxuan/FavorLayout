@@ -21,13 +21,18 @@ public class MainActivity extends Activity {
 
         favorLayout = (FavorLayout) findViewById(R.id.favor);
         favorLayout.setDefaultPraiseCount(0);
+        /**
+         * 如果要使用自定义的图形的话调用FavorLayout的setViewType方法，例如下面用了一个自定义的图形
+         *
+         */
+        favorLayout.setViewType(CustomImageView.class.getName());
         favorLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN)
                     favorLayout.setFavor(0, true, "name" + random.nextInt(30));
                 /**
-                 * 另一种添加心形的方式
+                 * 另一种添加心形的方式，可以一次出现多个心形，最大并发数可以在xml里面设置app:favorIntercurrentHeartNum参数
                  * favorLayout.setFavor(heartCount, false, "name" + random.nextInt(30));
                  */
                 heartCount += 100;

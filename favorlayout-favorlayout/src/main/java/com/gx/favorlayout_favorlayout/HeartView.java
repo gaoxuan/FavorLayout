@@ -11,10 +11,10 @@ import android.widget.ImageView;
 /**
  * Created by gaoxuan on 2016/8/14.
  */
-public class HeartView extends ImageView {
-    private float value;
+public class HeartView extends AnimImageView {
+//    private float value;
     private Paint paint;
-    private boolean isAnimEnded;
+//    private boolean isAnimEnded;
 
     public HeartView(Context context) {
         super(context);
@@ -27,10 +27,15 @@ public class HeartView extends ImageView {
     }
 
     @Override
+    public void setColor(int color) {
+        paint.setColor(color);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         Path path = new Path();
         paint.setStyle(Paint.Style.FILL);
-        paint.setAlpha(100);
+        paint.setAlpha(255);
         paint.setAntiAlias(true);
         //定义心形大小
         float scale = 2 * getResources().getDisplayMetrics().density / 3;
@@ -47,29 +52,29 @@ public class HeartView extends ImageView {
         canvas.drawPath(path, paint);
     }
 
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = MeasureSpec.getSize(widthMeasureSpec);
-        int height = MeasureSpec.getSize(heightMeasureSpec);
-        this.setMeasuredDimension(width, height);
-    }
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        int width = MeasureSpec.getSize(widthMeasureSpec);
+//        int height = MeasureSpec.getSize(heightMeasureSpec);
+//        this.setMeasuredDimension(width, height);
+//    }
 
-    public void setColor(int color) {
-        this.paint.setColor(color);
-    }
+//    public void setColor(int color) {
+//        this.paint.setColor(color);
+//    }
 
-    public void setValue(float value) {
-        this.value = value;
-    }
-
-    public float getValue() {
-        return value;
-    }
-
-    public void setAnimEnded(boolean isAnimEnded) {
-        this.isAnimEnded = isAnimEnded;
-    }
-
-    public boolean isAnimEnded() {
-        return isAnimEnded;
-    }
+//    public void setValue(float value) {
+//        this.value = value;
+//    }
+//
+//    public float getValue() {
+//        return value;
+//    }
+//
+//    public void setAnimEnded(boolean isAnimEnded) {
+//        this.isAnimEnded = isAnimEnded;
+//    }
+//
+//    public boolean isAnimEnded() {
+//        return isAnimEnded;
+//    }
 }

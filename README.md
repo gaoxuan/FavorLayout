@@ -6,13 +6,17 @@
 ![addOne](https://github.com/gaoxuan/FavorLayout/blob/master/raw/addOne.gif)
 <br/>
 ![addMore](https://github.com/gaoxuan/FavorLayout/blob/master/raw/addMore.gif)
-
-##怎么用
+<br/>
+<br/>
+使用自定义的图形
+<br/>
+![addMore](https://github.com/gaoxuan/FavorLayout/blob/master/raw/custom.gif)
+## Gradle
 
 ```
 android {
     
-	...	
+    ...	
 
 	buildscript{
 	        repositories {
@@ -32,10 +36,10 @@ android {
 ```
 dependencies {
     ...
-    compile 'com.github.gaoxuan:FavorLayout:1.0'
+    compile 'com.github.gaoxuan:FavorLayout:1.1'
 }
 ```
-
+## 用法
 ```
  <com.gx.favorlayout_favorlayout.FavorLayout
         android:id="@+id/favor"
@@ -44,4 +48,14 @@ dependencies {
         app:favorHeartWidth="40dp"
         app:favorNodeNum="5"
         app:favorRangeWidth="40dp"/>
+```
+## 更新
+现在开发者可以自定义漂浮的图形
+```
+class YourImageView extends AnimImageView {
+
+    protected void onDraw(Canvas canvas) {
+        //custom
+    }
+}
 ```

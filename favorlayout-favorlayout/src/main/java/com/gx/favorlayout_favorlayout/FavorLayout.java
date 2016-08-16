@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.graphics.PointF;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -25,6 +26,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -54,7 +57,7 @@ public class FavorLayout extends RelativeLayout {
     /**
      * 维护一个最大数为DEFAULT_COUNT_MAX的心形池
      */
-    private LinkedList<HeartView> heartViewList = new LinkedList<>();
+    private LinkedList<AnimImageView> heartViewList = new LinkedList<>();
 
     private int nHeartColor = Color.RED;
     private int mDuration;
@@ -75,6 +78,8 @@ public class FavorLayout extends RelativeLayout {
     private LinearLayout contentLL;
     private TextView numTV;
     private ImageView whiteIV;
+
+    private String className; //动态指定动画的对象
 
     public FavorLayout(Context context) {
         this(context, null);
@@ -176,8 +181,9 @@ public class FavorLayout extends RelativeLayout {
 
     /**
      * 有两种方式添加心形，设置一个总数，或者每次加一
+     *
      * @param count
-     * @param addOne 是不是每次加一
+     * @param addOne   是不是每次加一
      * @param username
      */
     public void setFavor(int count, boolean addOne, String username) {
@@ -221,9 +227,13 @@ public class FavorLayout extends RelativeLayout {
         nHeartColor = Util.BKDRHash(username);
     }
 
+    public void setViewType(String className) {
+        this.className = className;
+    }
+
     public void removeAllHeartView() {
         if (heartViewList != null) {
-            Iterator<HeartView> it = heartViewList.iterator();
+            Iterator<AnimImageView> it = heartViewList.iterator();
             while (it.hasNext()) {
                 removeView(it.next());
             }
@@ -231,16 +241,15 @@ public class FavorLayout extends RelativeLayout {
     }
 
     private void addFavor() {
-        HeartView heartView;
+        AnimImageView heartView;
         if (heartViewList.size() < mMaxHeartCount) {
-            heartView = new HeartView(mContext);
+            heartView = getHeartViewFormClassName(className);
             heartViewList.addFirst(heartView);
         } else {
             if (!heartViewList.getLast().isAnimEnded()) return;
             heartView = heartViewList.removeLast();
             heartViewList.addFirst(heartView);
         }
-
         heartView.setAnimEnded(false);
         heartView.setColor(nHeartColor);
         heartView.setLayoutParams(layoutParams);
@@ -250,7 +259,30 @@ public class FavorLayout extends RelativeLayout {
         animator.start();
     }
 
-    private Animator getAnimator(HeartView heartView) {
+    private AnimImageView getHeartViewFormClassName(String className) {
+        if (TextUtils.isEmpty(className))
+            return new HeartView(mContext);
+        else {
+            try {
+                Class c = Class.forName(className);
+                Constructor constructor = c.getDeclaredConstructor(Context.class);
+                return (AnimImageView) constructor.newInstance(mContext);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    private Animator getAnimator(AnimImageView heartView) {
         AnimatorSet set = getStartAnimator(heartView);
         ValueAnimator pathAnim = cratePathAnimation(heartView);
         AnimatorSet finalSet = new AnimatorSet();
@@ -260,7 +292,7 @@ public class FavorLayout extends RelativeLayout {
         return finalSet;
     }
 
-    private ValueAnimator cratePathAnimation(HeartView heartView) {
+    private ValueAnimator cratePathAnimation(AnimImageView heartView) {
         Path path = Util.buildPath(startPoint, mNodeCount, (int) startPoint.y, mRange);
         ObjectAnimator animator = ObjectAnimator.ofFloat(heartView, "value", 0f, 1f);
         animator.addUpdateListener(new PathListener(heartView, path));
@@ -269,7 +301,7 @@ public class FavorLayout extends RelativeLayout {
         return animator;
     }
 
-    private AnimatorSet getStartAnimator(HeartView heartView) {
+    private AnimatorSet getStartAnimator(AnimImageView heartView) {
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(heartView, View.SCALE_X, 0.1f, 1.4f, 1f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(heartView, View.SCALE_Y, 0.1f, 1.4f, 1f);
         AnimatorSet start = new AnimatorSet();
@@ -281,9 +313,9 @@ public class FavorLayout extends RelativeLayout {
     }
 
     private class AnimEndListener extends AnimatorListenerAdapter {
-        private HeartView heartView;
+        private AnimImageView heartView;
 
-        public AnimEndListener(HeartView heartView) {
+        public AnimEndListener(AnimImageView heartView) {
             this.heartView = heartView;
         }
 
@@ -298,10 +330,10 @@ public class FavorLayout extends RelativeLayout {
      * 根据插值器产生的值改变View的坐标
      */
     class PathListener implements ValueAnimator.AnimatorUpdateListener {
-        HeartView heartView;
+        AnimImageView heartView;
         PathMeasure pathMeasure;
 
-        public PathListener(HeartView heartView, Path path) {
+        public PathListener(AnimImageView heartView, Path path) {
             this.heartView = heartView;
             pathMeasure = new PathMeasure();
             pathMeasure.setPath(path, false);
