@@ -36,7 +36,7 @@ android {
 ```
 dependencies {
     ...
-    compile 'com.github.gaoxuan:FavorLayout:1.1'
+    compile 'com.github.gaoxuan:FavorLayout:1.0'
 }
 ```
 ## 用法
@@ -50,7 +50,10 @@ dependencies {
         app:favorRangeWidth="40dp"/>
 ```
 ## 更新
-现在开发者可以自定义漂浮的图形
+
+* 如果不想显示起始的心形和数字可以这样做，在xml中设置favorTip属性为false
+* 可以自定义漂浮的图形
+
 ```
 class YourImageView extends AnimImageView {
 
