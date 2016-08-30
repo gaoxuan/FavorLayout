@@ -15,5 +15,6 @@
         <attr name="favorRangeWidth" format="dimension" />
         <attr name="favorMarginRight" format="dimension" />
         <attr name="favorMarginBottom" format="dimension" />
+        <attr name="favorTip" format="boolean"/>
     </declare-styleable>
 </resources>
