@@ -70,6 +70,7 @@ public class FavorLayout extends RelativeLayout {
     private int mMarginBottom;
     private int mRange;
     private int currentHeartCount;
+    private boolean mTip;
 
     private Interpolator interpolator;
     private PointF startPoint;
@@ -116,6 +117,7 @@ public class FavorLayout extends RelativeLayout {
         }
         mMarginRight = (int) (a.getDimension(R.styleable.FavorLayout_favorMarginRight, Util.getPxFromDp(DEFAULT_MARGIN_RIGHT, mContext)) + 0.5);
         mMarginBottom = (int) (a.getDimension(R.styleable.FavorLayout_favorMarginBottom, Util.getPxFromDp(DEFAULT_MARGIN_BOTTOM, mContext)) + 0.5);
+        mTip = a.getBoolean(R.styleable.FavorLayout_favorTip, true);
         mSpeedMode = a.getInt(R.styleable.FavorLayout_favorSpeedMode, 0);
         switch (mSpeedMode) {
             case SPEED_MODE_LINEAR:
@@ -130,17 +132,27 @@ public class FavorLayout extends RelativeLayout {
             case SPEED_MODE_ACCELERATEDECELERATE:
                 interpolator = new AccelerateDecelerateInterpolator();
         }
-
     }
 
     private void initContentView() {
-        this.initLinearLayout();
-        this.initImageView();
-        this.initTextView();
+        initLinearLayout();
+        initImageView();
+        initTextView();
+        changeTipShow();
+    }
+
+    private void changeTipShow() {
+        if (mTip) {
+            whiteIV.setVisibility(VISIBLE);
+            numTV.setVisibility(VISIBLE);
+        } else {
+            whiteIV.setVisibility(GONE);
+            numTV.setVisibility(GONE);
+        }
     }
 
     private void initImageView() {
-        this.whiteIV = new ImageView(mContext);
+        whiteIV = new ImageView(mContext);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.gravity = Gravity.CENTER;
         whiteIV.setLayoutParams(layoutParams);
@@ -160,7 +172,7 @@ public class FavorLayout extends RelativeLayout {
     }
 
     private void initLinearLayout() {
-        contentLL = new LinearLayout(this.mContext);
+        contentLL = new LinearLayout(mContext);
         LayoutParams layoutParams = new LayoutParams(Util.getPxFromDp(DEFAULT_CONTENT_WIDTH, mContext), ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(ALIGN_PARENT_RIGHT);
         layoutParams.addRule(ALIGN_PARENT_BOTTOM);
