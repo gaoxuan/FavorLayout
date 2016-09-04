@@ -1,5 +1,7 @@
 #FavorLayout
 
+#### My colleague's project, here are more information about [him](https://github.com/gaoxuan/FavorLayout).
+
 ### [中文](./README-zh.md)
 
 A custom view animation looks like the Periscope.
@@ -72,7 +74,3 @@ favorlayout.setViewType(YourImageView.class.getName());
 
 - You can set false of favorTip in the xml
 - These Heart View can also be customized
-
-## About me
-
-My blog: http://blog.csdn.net/puyahua

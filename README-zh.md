@@ -1,4 +1,6 @@
 #FavorLayout
+### 同事的项目，欢迎为[他](https://github.com/gaoxuan/FavorLayout)Star，谢谢！
+
 实现手机视频直播中给主播点赞的功能，每点一下会从底部出现一个心形飘到屏幕最上方
 
 可以自定义
