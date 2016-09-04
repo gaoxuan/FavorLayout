@@ -10,9 +10,17 @@
 - 起始位置等
 
 下面是在模拟器上录制的有点卡，在手机上很流畅
+
 ![addOne](https://github.com/gaoxuan/FavorLayout/blob/master/raw/addOne.gif)
+
+
+
 ![addMore](https://github.com/gaoxuan/FavorLayout/blob/master/raw/addMore.gif)
-使用自定义的图形
+
+
+
+### 使用自定义的图形
+
 ![addMore](https://github.com/gaoxuan/FavorLayout/blob/master/raw/custom.gif)
 
 ## Gradle
