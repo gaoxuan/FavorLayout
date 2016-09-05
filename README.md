@@ -49,7 +49,7 @@ android {
 ```xml
 dependencies {
     ...
-    compile 'com.github.gaoxuan:FavorLayout:1.0'
+    compile 'com.github.gaoxuan:FavorLayout:1.1'
 }
 ```
 ## Usage
