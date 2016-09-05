@@ -1,15 +1,25 @@
 #FavorLayout
 
-#### My colleague's project, here are more information about [him](https://github.com/gaoxuan/FavorLayout).
+An Android library implementing praise animation like Periscope.
+<br>The animation use ObjectAnimator and the path consists some different Bézier curve.</br>
 
 ### [中文](./README-zh.md)
 
-A custom view animation looks like the Periscope.
+in emulator：
+#### Add One
 
 ![addOne](https://github.com/gaoxuan/FavorLayout/blob/master/raw/addOne.gif)
 
-## Features
+#### Add More
 
+![addMore](https://github.com/gaoxuan/FavorLayout/blob/master/raw/addMore.gif)
+
+#### Use Custom View
+
+![addMore](https://github.com/gaoxuan/FavorLayout/blob/master/raw/custom.gif)
+
+## Features
+<br>A custom view animation looks like the Periscope.</br>
 These features of the Custom View can be configured:
 
 - Time of the animation
@@ -17,31 +27,23 @@ These features of the Custom View can be configured:
 - Initial position
 - Custom shapes
 
-## Add More
-
-![addMore](https://github.com/gaoxuan/FavorLayout/blob/master/raw/addMore.gif)
-
-## Use Custom View
-
-![addMore](https://github.com/gaoxuan/FavorLayout/blob/master/raw/custom.gif)
-
 ## Gradle
 
 ```xml
 android {
-    ...	
-	buildscript{
-	        repositories {
-	            jcenter()
-	            maven { url = 'https://jitpack.io' }
-	        }
-	    }
-	    allprojects {
-	        repositories {
-	            jcenter()
-	            maven { url = 'https://jitpack.io' }
-	        }
-	    }
+    ...    
+    buildscript{
+            repositories {
+                jcenter()
+                maven { url = 'https://jitpack.io' }
+            }
+        }
+        allprojects {
+            repositories {
+                jcenter()
+                maven { url = 'https://jitpack.io' }
+            }
+        }
 }
 ```
 ```xml
@@ -52,7 +54,7 @@ dependencies {
 ```
 ## Usage
 ```xml
- <com.gx.favorlayout_favorlayout.FavorLayout
+<com.gx.favorlayout_favorlayout.FavorLayout
         android:id="@+id/favor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,6 +62,19 @@ dependencies {
         app:favorNodeNum="5"
         app:favorRangeWidth="40dp"/>
 ```
+##### Attributes:
+* `favorDuration` animation duration
+* `favorSpeedMode` speed mode, `linear|accelerate|decelerate|acceleratedecelerate`
+* `favorIntercurrentHeartNum` set maximum number of concurrent
+* `favorMaxHeartNum` set maximum number of view in screen except the white ImageView and the number TextView
+* `favorNodeNum` node number in path
+* `favorHeartWidth` view's width and height
+* `favorRangeWidth` floating range
+* `favorMarginRight` view's margin left values
+* `favorMarginBottom` view's margin bottom values
+* `favorTip` set the white ImageView and the number TextView to hidden of the given values `true|false`
+
+##### If you want to use custom view
 ```java
 class YourImageView extends AnimImageView {
     protected void onDraw(Canvas canvas) {
@@ -70,7 +85,7 @@ class YourImageView extends AnimImageView {
 favorlayout.setViewType(YourImageView.class.getName());
 ```
 
-## Tips
+## Update
 
-- You can set false of favorTip in the xml
+- You can set false of favorTip in the xml to hide the white ImageView and the number TextView
 - These Heart View can also be customized
