@@ -132,6 +132,7 @@ public class FavorLayout extends RelativeLayout {
             case SPEED_MODE_ACCELERATEDECELERATE:
                 interpolator = new AccelerateDecelerateInterpolator();
         }
+        a.recycle();
     }
 
     private void initContentView() {
