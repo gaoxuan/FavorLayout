@@ -2,7 +2,6 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
-/.idea/gradle.xml
 /app/app.iml
 /favorlayout-favorlayout/favorlayout-favorlayout.iml
 .DS_Store
