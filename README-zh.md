@@ -67,7 +67,7 @@ dependencies {
 * `favorRangeWidth` 动画浮动范围
 * `favorMarginRight` 心形距父容器右边的值
 * `favorMarginBottom` 心形距父容器下面的值
-* `favorTip` 是否隐藏开始的白色心形和心形数，使用给定值`true|false`
+* `favorTip` 是否隐藏开始的白色心形和心形数，使用给定值`true|false`，表示显示或者隐藏开始的控件
 
 ##### 如果你想用自定义的图形
 ```java
