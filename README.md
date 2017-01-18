@@ -72,7 +72,7 @@ dependencies {
 * `favorRangeWidth` floating range
 * `favorMarginRight` view's margin left values
 * `favorMarginBottom` view's margin bottom values
-* `favorTip` set the white ImageView and the number TextView to show of the given values `true|false`
+* `favorTip` set the white ImageView and the number TextView to show or hidden with the given values `true|false`
 
 ##### If you want to use custom view
 ```java
